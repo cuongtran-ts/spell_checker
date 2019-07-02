@@ -12,10 +12,11 @@ def get_text_fr_file(file_path=DEFAULT_FILE_PATH):
     with open(file_path, 'r') as file:
         data = file.read().replace('\n', '')
 
+    file.close()
     return data
 
 
-def computeWordFreq(all_words):
+def compute_word_freq(all_words):
     """
 
     Compute distribution of words in a corpus.
@@ -102,3 +103,37 @@ def del_character(a_word, position=0):
         print('Warning out of range, cannot insert ')
         return ""
     return a_word[:position] + a_word[position + 1:]
+
+
+def suggest_correct_spelling(a_word, word_freq_dict):
+    '''
+    Suggest a correct spelling for a typing word.
+    If we can find several words  in a dictionary that closely match with given word
+    then return the one that has the highest frequency.
+
+    '''
+
+    possible_matchings = {}
+    for i in range(len(a_word)):
+
+        temp_word = del_character(a_word, position=i)
+        if temp_word in word_freq_dict.keys():
+            possible_matchings[temp_word] = word_freq_dict[temp_word]
+            # return temp_word
+
+        for c in alphabet:
+            temp_word = insert_character(a_word, c, position=i)
+            if temp_word in word_freq_dict.keys():
+                possible_matchings[temp_word] = word_freq_dict[temp_word]
+                # return temp_word
+
+            temp_word = replace_character(a_word, c, position=i)
+            if temp_word in word_freq_dict.keys():
+                possible_matchings[temp_word] = word_freq_dict[temp_word]
+                # return temp_word
+
+    if len(possible_matchings.keys()) < 1:
+        return 'Cannot suggest correct words'
+    else:
+        # return the word with highest frequency
+        return max(possible_matchings.items(), key=operator.itemgetter(1))[0]
