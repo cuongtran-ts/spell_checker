@@ -67,9 +67,9 @@ def is_correct_word(a_word, word_freq_dict):
     words = word_freq_dict.keys()
 
     if a_word in words:
-        print('Correct word!')
+        return True
     else:
-        print('Warning a typo!')
+        return False
 
 
 def insert_character(a_word, c, position=0):
@@ -121,7 +121,7 @@ def suggest_correct_spelling(a_word, word_freq_dict):
             possible_matchings[temp_word] = word_freq_dict[temp_word]
             # return temp_word
 
-        for c in :
+        for c in ALPHABET:
             temp_word = insert_character(a_word, c, position=i)
             if temp_word in word_freq_dict.keys():
                 possible_matchings[temp_word] = word_freq_dict[temp_word]
