@@ -3,7 +3,7 @@ import numpy as np
 from collections import OrderedDict
 
 DEFAULT_FILE_PATH = './text.txt'
-
+ALPHABET = string.ascii_lowercase
 
 def get_text_fr_file(file_path=DEFAULT_FILE_PATH):
     """
@@ -121,7 +121,7 @@ def suggest_correct_spelling(a_word, word_freq_dict):
             possible_matchings[temp_word] = word_freq_dict[temp_word]
             # return temp_word
 
-        for c in alphabet:
+        for c in :
             temp_word = insert_character(a_word, c, position=i)
             if temp_word in word_freq_dict.keys():
                 possible_matchings[temp_word] = word_freq_dict[temp_word]
